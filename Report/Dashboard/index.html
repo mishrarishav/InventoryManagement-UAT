@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><script>window.INVENTORY_UAT_BASE="/InventoryManagement-UAT/";</script><script src="/InventoryManagement-UAT/uat/vendor/sql-wasm.js"></script><script src="/InventoryManagement-UAT/uat/runtime.js"></script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Dashboard - Inventory Management</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/InventoryManagement-UAT/assets/img/favicon.png" rel="icon">
+    <link href="/InventoryManagement-UAT/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/css/style.css" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/css/SweetAlert.css" rel="stylesheet" />
+    <script src="/InventoryManagement-UAT/assets/js/sweetalert.min.js"></script>
+
+<script src="/InventoryManagement-UAT/lib/jquery/dist/jquery-3.6.0.js"></script><script>window.InventoryUat.installJQuery(window.jQuery);</script></head>
+<body>
+
+    <!-- ======= Header ======= -->
+    <header b-c4618qd80j id="header" class="header fixed-top d-flex align-items-center" style="background-color:#7cb5b1;">
+
+        <div b-c4618qd80j class="d-flex align-items-center justify-content-between">
+            <a b-c4618qd80j href="#" class="logo d-flex align-items-center">
+                <img src="/InventoryManagement-UAT/assets/img/logo.svg" alt="">
+            </a>
+            <i b-c4618qd80j class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <nav b-c4618qd80j class="header-nav ms-auto">
+            <ul b-c4618qd80j class="d-flex align-items-center">
+                <li b-c4618qd80j class="nav-item dropdown pe-3">
+
+                    <a b-c4618qd80j class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <span b-c4618qd80j class="d-none d-md-block dropdown-toggle ps-2">
+                            UAT Administrator
+                        </span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul b-c4618qd80j class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li b-c4618qd80j class="dropdown-header">
+                            <span b-c4618qd80j>
+                                Admin
+                            </span>
+                        </li>
+                        <li b-c4618qd80j>
+                            <hr b-c4618qd80j class="dropdown-divider">
+                        </li>
+
+
+                        <li b-c4618qd80j>
+                            <a class="dropdown-item d-flex align-items-center" href="#uat-logout">
+                                <i b-c4618qd80j class="bi bi-box-arrow-right"></i>
+                                <span b-c4618qd80j>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside b-c4618qd80j id="sidebar" class="sidebar">
+        <ul b-c4618qd80j class="sidebar-nav" id="sidebar-nav">          
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-menu-button-wide"></i><span b-c4618qd80j>Dashboard & Report</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/Dashboard/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Dashboard</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/InventoryReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Inventory Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/InwardReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Inward Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/OutwardReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Outward Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/LowStockAlerts/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Re-Order Alerts</span>
+                            </a>
+                        </li>                                               
+                    </ul>
+                </li>
+                <!-- End Components Nav -->
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#forms-nav1" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-journal-text"></i><span b-c4618qd80j>Operations</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="forms-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMovement/Inward/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Inward</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMovement/Outward/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Outward</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#forms-nav2" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-journal-text"></i><span b-c4618qd80j>Masters</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="forms-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialType/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Type</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Material/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material</span>
+                            </a>
+                        </li>
+                         <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMapping/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material-Bin Mapping</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/LocationMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Storage Location</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/RackMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Racks</span>
+                            </a>
+                        </li>                         
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/LevelMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Shelf</span>
+                            </a>
+                        </li>                         
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/BinMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Bins</span>
+                            </a>
+                        </li>  
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Users/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Users</span>
+                            </a>
+                        </li>  
+                    </ul>
+                </li>
+                <!-- End Forms Nav -->
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <main b-c4618qd80j id="main" class="main">
+        
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+</div>
+
+<section class="section dashboard">
+    <div class="row">
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-xxl-3 col-md-6 col-xl-12">
+                    <div class="card info-card sales-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Inventory Value</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6 id="genValue">2500.0</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-md-6 col-xl-12">
+                    <div class="card info-card revenue-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Current Stock Level</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6 id="InValue">25</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-md-6 col-xl-12">
+                    <div class="card info-card customers-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pending Reorder Items</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6 id="PenValue">1</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-md-6 col-xl-12">
+                    <div class="card info-card customers-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Capacity Utilization</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6 id="PenValue">2.5 %</h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card mt-3">
+                        <div class="card-body p-2">
+                            <h5 class="card-title">Recent Inward (Top 20)</h5>
+                            <div style="overflow: auto; max-height: 250px; min-width: 100%;">
+                                <table id="inwardTable" class="table table-bordered table-striped mb-0" style="font-size: small; min-width: 600px;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Part No</th>
+                                            <th>Material</th>
+                                            <th>Location</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- AJAX content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card mt-3">
+                        <div class="card-body p-2">
+                            <h5 class="card-title">Recent Outward (Top 20)</h5>
+                            <div style="overflow: auto; max-height: 250px; min-width: 100%;">
+                                <table id="outwardTable" class="table table-bordered table-striped mb-0" style="font-size: small; min-width: 600px;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Part No</th>
+                                            <th>Material</th>
+                                            <th>Location</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- AJAX content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer b-c4618qd80j id="footer" class="footer">
+        <div b-c4618qd80j class="credits">
+        </div>
+    </footer><!-- End Footer -->
+
+    <a b-c4618qd80j href="#" class="back-to-top d-flex align-items-center justify-content-center"><i b-c4618qd80j class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    
+
+    <script src="/InventoryManagement-UAT/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    
+    <script src="/InventoryManagement-UAT/assets/vendor/tinymce/tinymce.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/InventoryManagement-UAT/assets/js/main.js"></script>
+
+
+    
+    
+    <script>
+        var mytable1, mytable2;
+        $(document).ready(function () {
+            mytable1 = initDataTable('#inwardTable');
+            mytable2 = initDataTable('#outwardTable');
+            loadInwardReports();
+            loadOutwardReports();
+        });
+
+        function loadInwardReports() {
+            $.getJSON("/Report/MaterialInwardReportDashboard", function (data) {
+                mytable1.clear();
+                var rows = [];
+                data.forEach(item => {
+                    var rowData = [
+                        new Date(item.inwardDate).toLocaleDateString(),
+                        item.barCode,
+                        item.materialName,
+                        item.rackNumber + ',' + item.levelNumber + ',' + item.binNumber,
+                        item.quantity + ' ' + item.unitOfMeasure
+                    ];
+                    rows.push(rowData);
+                });
+                mytable1.clear();
+                mytable1.rows.add(rows).draw();
+            });
+        }
+
+        function loadOutwardReports() {
+            $.getJSON("/Report/MaterialOutwardReportDashboard", function (data) {
+                mytable2.clear();
+                var rows = [];
+                data.forEach(item => {
+                    var rowData = [
+                        new Date(item.outwardDate).toLocaleDateString(),
+                        item.barCode,
+                        item.materialName,
+                        item.locationName + ',' + item.rackNumber + ',' + item.levelNumber + ',' + item.binNumber,
+                        item.quantity + ' ' + item.unitOfMeasure
+                    ];
+                    rows.push(rowData);
+                });
+                mytable2.clear();
+                mytable2.rows.add(rows).draw();
+            });
+        }
+    </script>
+
+
+    
+    
+       <script src="/InventoryManagement-UAT/lib/jquery/dist/jquery-ui.js"></script>
+           <script src="/InventoryManagement-UAT/lib/jquery/dist/select2.min.js"></script>
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+       <link href="/InventoryManagement-UAT/css/jquery.dataTables.min.css" rel="stylesheet" />
+       <script src="/InventoryManagement-UAT/lib/jquery/dist/jquery.dataTables.min.js"></script>
+     
+       <link href="/InventoryManagement-UAT/css/buttons.dataTables.min.css" />
+       <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/buttons.print.min.js"></script>
+       <script type="text/javascript" src="/InventoryManagement-UAT/js/site.js"></script>
+       
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><script>window.INVENTORY_UAT_BASE="/InventoryManagement-UAT/";</script><script src="/InventoryManagement-UAT/uat/vendor/sql-wasm.js"></script><script src="/InventoryManagement-UAT/uat/runtime.js"></script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Material Inward Entry - Inventory Management</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/InventoryManagement-UAT/assets/img/favicon.png" rel="icon">
+    <link href="/InventoryManagement-UAT/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/css/style.css" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/css/SweetAlert.css" rel="stylesheet" />
+    <script src="/InventoryManagement-UAT/assets/js/sweetalert.min.js"></script>
+
+<script src="/InventoryManagement-UAT/lib/jquery/dist/jquery-3.6.0.js"></script><script>window.InventoryUat.installJQuery(window.jQuery);</script></head>
+<body>
+
+    <!-- ======= Header ======= -->
+    <header b-c4618qd80j id="header" class="header fixed-top d-flex align-items-center" style="background-color:#7cb5b1;">
+
+        <div b-c4618qd80j class="d-flex align-items-center justify-content-between">
+            <a b-c4618qd80j href="#" class="logo d-flex align-items-center">
+                <img src="/InventoryManagement-UAT/assets/img/logo.svg" alt="">
+            </a>
+            <i b-c4618qd80j class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <nav b-c4618qd80j class="header-nav ms-auto">
+            <ul b-c4618qd80j class="d-flex align-items-center">
+                <li b-c4618qd80j class="nav-item dropdown pe-3">
+
+                    <a b-c4618qd80j class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <span b-c4618qd80j class="d-none d-md-block dropdown-toggle ps-2">
+                            UAT Administrator
+                        </span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul b-c4618qd80j class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li b-c4618qd80j class="dropdown-header">
+                            <span b-c4618qd80j>
+                                Admin
+                            </span>
+                        </li>
+                        <li b-c4618qd80j>
+                            <hr b-c4618qd80j class="dropdown-divider">
+                        </li>
+
+
+                        <li b-c4618qd80j>
+                            <a class="dropdown-item d-flex align-items-center" href="#uat-logout">
+                                <i b-c4618qd80j class="bi bi-box-arrow-right"></i>
+                                <span b-c4618qd80j>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside b-c4618qd80j id="sidebar" class="sidebar">
+        <ul b-c4618qd80j class="sidebar-nav" id="sidebar-nav">          
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-menu-button-wide"></i><span b-c4618qd80j>Dashboard & Report</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/Dashboard/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Dashboard</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/InventoryReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Inventory Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/InwardReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Inward Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/OutwardReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Outward Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/LowStockAlerts/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Re-Order Alerts</span>
+                            </a>
+                        </li>                                               
+                    </ul>
+                </li>
+                <!-- End Components Nav -->
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#forms-nav1" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-journal-text"></i><span b-c4618qd80j>Operations</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="forms-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMovement/Inward/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Inward</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMovement/Outward/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Outward</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#forms-nav2" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-journal-text"></i><span b-c4618qd80j>Masters</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="forms-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialType/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Type</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Material/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material</span>
+                            </a>
+                        </li>
+                         <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMapping/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material-Bin Mapping</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/LocationMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Storage Location</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/RackMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Racks</span>
+                            </a>
+                        </li>                         
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/LevelMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Shelf</span>
+                            </a>
+                        </li>                         
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/BinMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Bins</span>
+                            </a>
+                        </li>  
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Users/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Users</span>
+                            </a>
+                        </li>  
+                    </ul>
+                </li>
+                <!-- End Forms Nav -->
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <main b-c4618qd80j id="main" class="main">
+        
+<link href="/InventoryManagement-UAT/lib/select2/css/select2.min.css" rel="stylesheet" />
+
+<div class="pagetitle">
+    <h1>Material Inward Entry</h1>
+</div>
+
+<section class="section">
+    <form id="inwardForm">
+        <div class="row">
+            <!-- QR Code -->
+            <div class="col-md-3">
+                <label>Part Number (QR Code)</label>
+                <input type="text" id="barcode" class="form-control" required />
+            </div>
+
+            <!-- Material Description -->
+            <div class="col-md-3">
+                <label>Material Description</label>
+                <select id="materialId" class="form-control"></select>
+            </div>
+
+            <!-- Location -->
+            <div class="col-md-3">
+                <label>Location</label>
+                <select id="location" class="form-control" required></select>
+                <input type="hidden" id="rack" />
+                <input type="hidden" id="level" />
+                <input type="hidden" id="bin" />
+            </div>
+
+            <!-- Supplier -->
+            <div class="col-md-3">
+                <label>Supplier</label>
+                <select id="supplier" class="form-control" required>
+                    <option value="">Select Supplier</option>
+                </select>
+            </div>
+
+            <!-- Quantity -->
+            <div class="col-md-3">
+                <label>Quantity</label>
+                <input type="number" id="quantity" class="form-control" required />
+                <strong>Existing Qty: <span id="existingQuantity">0</span></strong>
+            </div>
+
+            <!-- Save Button -->
+            <div class="col-md-3 mt-4">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+
+
+<!-- Report -->
+<div class="card mt-3">
+    <div class="card-body p-2">
+        <div style="overflow: auto; max-height: 250px; min-width: 100%;">
+            <table id="reportTable" class="table table-striped table-bordered mb-0" style="font-size: small; min-width: 800px;">
+                <thead class="table-light">
+                    <tr><th colspan="6">Top 20 Transactions</th></tr>
+                    <tr>
+                        <th>Date Time</th>
+                        <th>Part Number</th>
+                        <th>Part</th>
+                        <th>Location</th>
+                        <th>In Quantity</th>
+                        <th>Supplier</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</section>
+
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer b-c4618qd80j id="footer" class="footer">
+        <div b-c4618qd80j class="credits">
+        </div>
+    </footer><!-- End Footer -->
+
+    <a b-c4618qd80j href="#" class="back-to-top d-flex align-items-center justify-content-center"><i b-c4618qd80j class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    
+
+    <script src="/InventoryManagement-UAT/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    
+    <script src="/InventoryManagement-UAT/assets/vendor/tinymce/tinymce.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/InventoryManagement-UAT/assets/js/main.js"></script>
+
+
+    
+    
+    <script src="/InventoryManagement-UAT/lib/select2/js/select2.min.js"></script>
+    <script>
+        var list = [];
+        var materialList = [];
+        var mytable;
+
+        $(document).ready(function () {
+            $('#materialId').select2();
+            mytable = initDataTable('#reportTable', 'Inward_Report');
+            loadReports();
+
+            // Load materials
+            $('#materialId').empty().append('<option value="">Select Item Description</option>');
+            $.getJSON(`/Material/GetAll`, function (data) {
+                materialList = data;
+                data.forEach(r => {
+                    $('#materialId').append(new Option(r.materialName, r.materialId));
+                });
+            });
+
+            // Load suppliers
+            $('#supplier').empty().append('<option value="">Select Supplier</option>');
+            $.getJSON(`/LocationMaster/GetSuppliers`, function (data) {
+                data.forEach(r => {
+                    $('#supplier').append(new Option(r.locationName, r.locationId));
+                });
+            });
+
+            // QR Code Scanner
+            $("#barcode").on("keypress", function (e) {
+                if (e.which === 13) {
+                    let barcode = $("#barcode").val().trim();
+                    if (!barcode) return;
+
+                    $.getJSON(`/Material/GetMaterialByBarcode?barcode=${barcode}`, function (data) {
+                        if (data.status === "0") {
+                            alert("Incorrect part number!");
+                            return;
+                        }
+
+                        let materialId = data.data.materialId;
+
+                        let wait = setInterval(() => {
+                            if ($('#materialId option[value="' + materialId + '"]').length > 0) {
+                                clearInterval(wait);
+                                $('#materialId').val(materialId).trigger('change');
+                            }
+                        }, 100);
+                    });
+                }
+            });
+
+            // When material is selected
+            $('#materialId').change(function () {
+                let materialId = $(this).val();
+                fetchDetails(materialId);
+            });
+
+            // On location change
+            $('#location').change(function () {
+                let selectedId = $(this).val();
+                list.forEach(r => {
+                    if (r.id == selectedId) {
+                        $("#rack").val(r.rackId);
+                        $("#level").val(r.levelId);
+                        $("#bin").val(r.binId);
+                    }
+                });
+            });
+
+            // Submit form
+            $('#inwardForm').submit(function (e) {
+                e.preventDefault();
+
+                let inward = {
+                    MaterialId: $('#materialId').val(),
+                    LocationId: $('#location').val(),
+                    RackId: $('#rack').val(),
+                    LevelId: $('#level').val(),
+                    BinId: $('#bin').val(),
+                    Quantity: $('#quantity').val(),
+                    InwardDate: new Date().toISOString(),
+                    SupplierId: $('#supplier').val()
+                };
+
+                $.ajax({
+                    url: '/MaterialMovement/CreateInward',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(inward),
+                    success: function () {
+                        alert('Material inward entry saved successfully!');
+                        $('#inwardForm')[0].reset();
+                        $('#materialId').val('').trigger('change');
+                        $('#existingQuantity').text('');
+                        loadReports();
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+
+        function fetchDetails(materialId) {
+            $('#location').empty();
+            $('#existingQuantity').text('0');
+
+            if (materialId) {
+                $.getJSON(`/MaterialMapping/GetLocationByMaterial?materialId=${materialId}`, function (data) {
+                    list = data;
+
+                    if (data.length > 0) {
+                        data.forEach(r => {
+                            $('#location').append(new Option(
+                                r.rackNumber + "-" + r.levelNumber + "-" + r.binNumber,
+                                r.id
+                            ));
+                        });
+
+                        if (data.length === 1) {
+                            $('#location').val(data[0].id).trigger('change');
+                            $('#rack').val(data[0].rackId);
+                            $('#level').val(data[0].levelId);
+                            $('#bin').val(data[0].binId);
+                        }
+                    } else {
+                        $('#location').append(new Option('No mapping found', ''));
+                    }
+                });
+
+                $.getJSON(`/MaterialMovement/GetExistingQuantity?materialId=${materialId}`, function (data) {
+                    $('#existingQuantity').text(data.existingQuantity ?? 0);
+                });
+            }
+        }
+
+        function loadReports() {
+            $.getJSON(`/MaterialMovement/InWardReport`, function (data) {
+                mytable.clear();
+                var rows = [];
+                data.forEach(item => {
+                    var rowData = [
+                        new Date(item.inwardDate).toLocaleDateString(),
+                        item.barCode,
+                        item.materialName,
+                        item.rackNumber + '-' + item.levelNumber + '-' + item.binNumber,
+                        item.quantity,
+                        item.supplierLocation
+                    ];
+                    rows.push(rowData);
+                });
+                mytable.rows.add(rows).draw();
+            });
+        }
+    </script>
+
+
+    
+    
+       <script src="/InventoryManagement-UAT/lib/jquery/dist/jquery-ui.js"></script>
+           <script src="/InventoryManagement-UAT/lib/jquery/dist/select2.min.js"></script>
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+       <link href="/InventoryManagement-UAT/css/jquery.dataTables.min.css" rel="stylesheet" />
+       <script src="/InventoryManagement-UAT/lib/jquery/dist/jquery.dataTables.min.js"></script>
+     
+       <link href="/InventoryManagement-UAT/css/buttons.dataTables.min.css" />
+       <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/buttons.print.min.js"></script>
+       <script type="text/javascript" src="/InventoryManagement-UAT/js/site.js"></script>
+       
+
+</body>
+</html>

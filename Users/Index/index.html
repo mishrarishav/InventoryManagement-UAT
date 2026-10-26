@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><script>window.INVENTORY_UAT_BASE="/InventoryManagement-UAT/";</script><script src="/InventoryManagement-UAT/uat/vendor/sql-wasm.js"></script><script src="/InventoryManagement-UAT/uat/runtime.js"></script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Users - Inventory Management</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/InventoryManagement-UAT/assets/img/favicon.png" rel="icon">
+    <link href="/InventoryManagement-UAT/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/InventoryManagement-UAT/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/css/style.css" rel="stylesheet">
+
+    <link href="/InventoryManagement-UAT/assets/css/SweetAlert.css" rel="stylesheet" />
+    <script src="/InventoryManagement-UAT/assets/js/sweetalert.min.js"></script>
+
+<script src="/InventoryManagement-UAT/lib/jquery/dist/jquery-3.6.0.js"></script><script>window.InventoryUat.installJQuery(window.jQuery);</script></head>
+<body>
+
+    <!-- ======= Header ======= -->
+    <header b-c4618qd80j id="header" class="header fixed-top d-flex align-items-center" style="background-color:#7cb5b1;">
+
+        <div b-c4618qd80j class="d-flex align-items-center justify-content-between">
+            <a b-c4618qd80j href="#" class="logo d-flex align-items-center">
+                <img src="/InventoryManagement-UAT/assets/img/logo.svg" alt="">
+            </a>
+            <i b-c4618qd80j class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <nav b-c4618qd80j class="header-nav ms-auto">
+            <ul b-c4618qd80j class="d-flex align-items-center">
+                <li b-c4618qd80j class="nav-item dropdown pe-3">
+
+                    <a b-c4618qd80j class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <span b-c4618qd80j class="d-none d-md-block dropdown-toggle ps-2">
+                            UAT Administrator
+                        </span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul b-c4618qd80j class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li b-c4618qd80j class="dropdown-header">
+                            <span b-c4618qd80j>
+                                Admin
+                            </span>
+                        </li>
+                        <li b-c4618qd80j>
+                            <hr b-c4618qd80j class="dropdown-divider">
+                        </li>
+
+
+                        <li b-c4618qd80j>
+                            <a class="dropdown-item d-flex align-items-center" href="#uat-logout">
+                                <i b-c4618qd80j class="bi bi-box-arrow-right"></i>
+                                <span b-c4618qd80j>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside b-c4618qd80j id="sidebar" class="sidebar">
+        <ul b-c4618qd80j class="sidebar-nav" id="sidebar-nav">          
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-menu-button-wide"></i><span b-c4618qd80j>Dashboard & Report</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/Dashboard/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Dashboard</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/InventoryReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Inventory Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/InwardReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Inward Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/OutwardReport/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Outward Reports</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Report/LowStockAlerts/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Re-Order Alerts</span>
+                            </a>
+                        </li>                                               
+                    </ul>
+                </li>
+                <!-- End Components Nav -->
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#forms-nav1" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-journal-text"></i><span b-c4618qd80j>Operations</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="forms-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMovement/Inward/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Inward</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMovement/Outward/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Outward</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li b-c4618qd80j class="nav-item">
+                    <a b-c4618qd80j class="nav-link collapsed" data-bs-target="#forms-nav2" data-bs-toggle="collapse" href="#">
+                        <i b-c4618qd80j class="bi bi-journal-text"></i><span b-c4618qd80j>Masters</span><i b-c4618qd80j class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul b-c4618qd80j id="forms-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialType/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material Type</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Material/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material</span>
+                            </a>
+                        </li>
+                         <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/MaterialMapping/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Material-Bin Mapping</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/LocationMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Storage Location</span>
+                            </a>
+                        </li>
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/RackMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Racks</span>
+                            </a>
+                        </li>                         
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/LevelMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Shelf</span>
+                            </a>
+                        </li>                         
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/BinMaster/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Bins</span>
+                            </a>
+                        </li>  
+                        <li b-c4618qd80j>
+                            <a href="/InventoryManagement-UAT/Users/Index/">
+                                <i b-c4618qd80j class="bi bi-circle"></i><span b-c4618qd80j>Users</span>
+                            </a>
+                        </li>  
+                    </ul>
+                </li>
+                <!-- End Forms Nav -->
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <main b-c4618qd80j id="main" class="main">
+        <style>
+        /* Dialog box styling */
+        #customDialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 1000;
+            text-align: center;
+        }
+        #customDialog input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+        }
+        #customDialog button {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            background: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+
+        }
+        #customDialog button.cancel {
+            background: #dc3545;
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>    
+<div class="pagetitle">
+    <h1>Users</h1>
+</div>
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form id="userForm" class="row">
+                        <input type="hidden" id="pasUserId" value="0">
+                        <input type="hidden" id="userId" value="0">
+                        <div class="col-md-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Mobile No</label>
+                            <input type="text" class="form-control" id="mobile" required maxlength="10">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Email Id</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">User Name</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Role</label>
+                             <select class="form-control" id="role" required>
+                                <option value="Admin">Admin</option>
+                                <option value="Executive">Executive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Password</label>
+                            <input type="text" class="form-control" id="password">
+                        </div>
+                        <div class="col-md-3 mt-3">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <table id="reportTable" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Mobile No</th>
+                                <th>Email ID</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Created On</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- AJAX content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="overlay"></div>
+
+    <!-- Custom Dialog -->
+    <div id="customDialog">
+        <h5>Enter New Password</h5>
+        <div id="inputContainer">           
+        </div>        
+        <br />
+        <button class="btn btn-sm" id="submitDialog">Submit</button>
+        <button class="btn btn-sm cancel" id="cancelDialog">Cancel</button>
+    </div>
+
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer b-c4618qd80j id="footer" class="footer">
+        <div b-c4618qd80j class="credits">
+        </div>
+    </footer><!-- End Footer -->
+
+    <a b-c4618qd80j href="#" class="back-to-top d-flex align-items-center justify-content-center"><i b-c4618qd80j class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    
+
+    <script src="/InventoryManagement-UAT/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    
+    <script src="/InventoryManagement-UAT/assets/vendor/tinymce/tinymce.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/InventoryManagement-UAT/assets/js/main.js"></script>
+
+
+    
+    
+<script>
+    var mytable;
+        $(document).ready(function () {
+          mytable =  initDataTable('#reportTable','UsersList');          
+            loadUsers();            
+            $('#userForm').on('submit', function (e) {
+                e.preventDefault();
+                let id = $('#userId').val();
+                let ent = {
+                    UserId: id,
+                    Username: $('#username').val(),
+                    Role: $('#role').val(),
+                    Name: $('#name').val(),
+                    MobileNo: $('#mobile').val(),
+                    EmailId:$('#email').val(),
+                    PasswordHash:$('#password').val()
+                };                
+
+                if (id == 0) {
+                    create(ent);
+                } else {
+                    update(ent);
+                }
+            });
+        });
+
+        function loadUsers() {
+            $.getJSON('/Users/GetAll', function (data) {     
+                console.log(data);
+             mytable.clear();                           
+             var rows = [];             
+             
+                data.forEach(item => {                    
+                    var formattedCreatedAt = new Date(item.createdAt).toISOString().split('T')[0];        
+                     var rowData = [
+                         item.name,
+                         item.mobileNo,
+                         item.emailId,
+                         item.username,
+                         item.role,
+                         formattedCreatedAt,
+                         item.lastLogin,                            
+                         '<button class="btn btn-sm btn-warning" onclick="edit(\''+item.name+'\', \'' + item.mobileNo + '\', \'' + item.emailId + '\', \'' + item.username + '\', \'' + item.role +'\',  \'' + item.userId + '\')">Edit</button> <button class="btn btn-sm btn-danger" onclick="openChangeP(\'' + item.userId + '\')">Change Pass</button>'
+                        ];
+                        rows.push(rowData);                    
+                });
+                mytable.clear();
+               mytable.rows.add(rows).draw();                   
+            });
+        }      
+
+        function openChangeP(userId){
+            $("#pasUserId").val(userId);
+              $('#overlay').fadeIn();
+                $('#customDialog').fadeIn();
+
+                 $('#inputContainer').html(
+                    '<input type="text" name="dynamicInput[]" placeholder="Enter password" class="dynamic-input" />'
+                );
+        }
+
+        function changeP(newpass){
+            let t={
+            userId:$("#pasUserId").val(),
+            password:newpass
+            };
+            $.ajax({
+                url: '/Users/ChangePassword',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(t),
+                success: function () {
+                    alert("Password changed successfully!");
+                    $('#overlay').fadeOut();
+                    $('#customDialog').fadeOut();
+                }
+            });
+        }
+
+         $('#cancelDialog, #overlay').click(function () {
+                $('#overlay').fadeOut();
+                $('#customDialog').fadeOut();
+            });
+
+            $('#submitDialog').click(function () {
+                const inputs = $('.dynamic-input').map(function () {
+                    return $(this).val();
+                }).get();                
+                changeP(inputs.join(', '));
+            });
+
+        function create(ent) {
+            $.ajax({
+                url: '/Users/Create',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(ent),
+                success: function () {
+                    loadUsers();
+                    resetForm();
+                }
+            });
+        }
+
+        function update(ent) {
+            $.ajax({
+                url: '/Users/Edit',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(ent),
+                success: function () {
+                    loadUsers();
+                    resetForm();
+                }
+            });
+        }
+
+        function edit(name, mobileNo, emailId,username,role,userId,) {
+            $('#userId').val(userId);
+            $('#name').val(name);
+            $('#mobile').val(mobileNo);
+            $('#email').val(emailId);
+            $('#username').val(username);
+            $('#role').val(role);
+        }
+
+        function resetForm() {
+             $('#userId').val(0);
+            $('#name').val('');
+            $('#mobile').val('');
+            $('#email').val('');
+            $('#username').val('');
+            $('#role').val('');
+        }
+</script>
+
+
+    
+    
+       <script src="/InventoryManagement-UAT/lib/jquery/dist/jquery-ui.js"></script>
+           <script src="/InventoryManagement-UAT/lib/jquery/dist/select2.min.js"></script>
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+       <link href="/InventoryManagement-UAT/css/jquery.dataTables.min.css" rel="stylesheet" />
+       <script src="/InventoryManagement-UAT/lib/jquery/dist/jquery.dataTables.min.js"></script>
+     
+       <link href="/InventoryManagement-UAT/css/buttons.dataTables.min.css" />
+       <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/InventoryManagement-UAT/assets/js/buttons.print.min.js"></script>
+       <script type="text/javascript" src="/InventoryManagement-UAT/js/site.js"></script>
+       
+
+</body>
+</html>
