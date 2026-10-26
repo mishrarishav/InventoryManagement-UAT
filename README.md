@@ -1,11 +1,12 @@
 ﻿# Inventory Management UAT
 
-Generated static UAT of the Inventory Management application.
+Inventory Management frontend, hosted on GitHub Pages.
 
-Demo login: `uatadmin` / `Uat@12345678`.
+UI: https://mishrarishav.github.io/InventoryManagement-UAT/
 
-This is browser-local testing. Its SQLite data stays in your browser's IndexedDB;
-there is no shared server database. Clearing site data deletes your local test data.
-Use Download backup to export a SQLite file. The demo login is not a server access
-control boundary. Use synthetic data only. Production application source and SQL
-Server credentials are not included in this repository.
+Backend: https://tserver2.eeslindia.org/InventoryMgmt
+
+Sign in with your UAT server account. All inventory data is stored in the backend's
+shared SQLite database. This repository contains static UI assets and public API
+configuration; it contains no database, account passwords, or production SQL Server
+credentials. Application source is maintained in the private InventoryManagement repo.
