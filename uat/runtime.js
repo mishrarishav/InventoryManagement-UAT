@@ -9,6 +9,16 @@
   let store;
   let SQL;
 
+  async function retryLoad(action) {
+    for (let attempt = 0; ; attempt++) {
+      try { return await action(); }
+      catch (error) {
+        if (attempt >= 2) throw error;
+        await new Promise(resolve => setTimeout(resolve, 400 * (attempt + 1)));
+      }
+    }
+  }
+
   function openStore() {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(storageName, 1);
@@ -46,13 +56,16 @@
 
   const ready = (async () => {
     [SQL, store] = await Promise.all([
-      window.initSqlJs({ locateFile: file => `${base}uat/vendor/${file}` }), openStore()
+      retryLoad(() => window.initSqlJs({ locateFile: file => `${base}uat/vendor/${file}` })), openStore()
     ]);
     await locked(async () => {
       if (!(await readDatabase())) {
-        const seed = await nativeFetch(`${base}uat/seed.db`);
-        if (!seed.ok) throw new Error('Could not load sample UAT data');
-        await persist(new Uint8Array(await seed.arrayBuffer()));
+        const bytes = await retryLoad(async () => {
+          const seed = await nativeFetch(`${base}uat/seed.db`);
+          if (!seed.ok) throw new Error('Could not load sample UAT data');
+          return new Uint8Array(await seed.arrayBuffer());
+        });
+        await persist(bytes);
       }
     });
   })();
@@ -363,8 +376,12 @@
 
   if (!isLogin && !currentUser()) location.replace(`${base}Users/Login/`);
   document.addEventListener('DOMContentLoaded', () => {
+    message('Pages UAT · Opening your local test data…');
     hydrate().catch(error => message(`Could not open UAT data: ${error.message}. Refresh to retry.`, true));
     if (isLogin) {
+      const submit = document.querySelector('form.login button[type="submit"]');
+      submit.disabled = true;
+      ready.then(() => { submit.disabled = false; }).catch(() => {});
       document.querySelector('form.login').addEventListener('submit', async event => {
         event.preventDefault();
         try {
