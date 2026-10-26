@@ -110,7 +110,8 @@
     const role = document.querySelector('.dropdown-header span');
     if (role) role.textContent = auth.user.role;
     // Forms with MVC-rendered choices must use current server records after export.
-    const needsChoices = /\/(?:Report|MaterialMapping)\//i.test(location.pathname);
+    const needsChoices = /\/(?:Report|MaterialMapping)\//i.test(location.pathname)
+      && document.querySelector('#materialDescription, #materialBarcode, #materialId, #supplierId, #customerId');
     if (needsChoices) {
       const materials = await request('/Material/GetAll');
       const fill = (id, rows, value, label) => {
@@ -138,6 +139,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    status(isLogin ? 'Inventory UAT · Sign in with your server account.' : 'Connecting to the server…');
     hydrate().catch(error => status(error.message, true));
     if (isLogin) {
       document.querySelector('form.login').addEventListener('submit', async event => {

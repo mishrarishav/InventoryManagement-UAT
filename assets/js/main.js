@@ -185,7 +185,7 @@
   const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
 
-  tinymce.init({
+  if (typeof tinymce !== 'undefined' && document.querySelector('textarea.tinymce-editor')) tinymce.init({
     selector: 'textarea.tinymce-editor',
     plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
     editimage_cors_hosts: ['picsum.photos'],
