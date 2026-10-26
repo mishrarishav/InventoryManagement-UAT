@@ -6,6 +6,7 @@
   const nativeFetch = window.fetch.bind(window);
   const authKey = `inventory-pages:${base}:server-login:v1`;
   const isLogin = /\/Users\/Login\/?$/i.test(location.pathname);
+  const isDashboard = /\/Report\/Dashboard\/?$/i.test(location.pathname);
   let auth;
   try { auth = JSON.parse(localStorage.getItem(authKey)); } catch { auth = null; }
 
@@ -37,16 +38,22 @@
     return data;
   }
 
-  let ready = Promise.resolve();
+  const ready = Promise.resolve();
   if (!isLogin) {
     if (!auth?.token) logout();
-    else ready = send('/api/auth/me').then(user => {
-      auth.user = { ...auth.user, ...user };
-      localStorage.setItem(authKey, JSON.stringify(auth));
-    });
   }
-  // Errors are also handled by each screen's requests and the visible status bar.
-  ready.catch(() => {});
+
+  // The API validates every token. Avoid blocking every page on a second login
+  // check, and start dashboard data while the HTML/styles/scripts are loading.
+  const eager = new Map();
+  if (isDashboard && auth?.token) {
+    for (const route of ['/api/dashboard', '/Report/MaterialInwardReportDashboard', '/Report/MaterialOutwardReportDashboard']) {
+      const pending = send(route);
+      pending.catch(() => {});
+      eager.set(route, pending);
+    }
+  }
+  const inFlight = new Map();
 
   function apiRoute(input) {
     const url = new URL(input, location.href);
@@ -64,7 +71,17 @@
     await ready;
     const route = apiRoute(input);
     if (!route) throw new Error('Unknown inventory API route.');
-    return send(route, options);
+    if ((options.method || 'GET').toUpperCase() !== 'GET') return send(route, options);
+    if (eager.has(route)) {
+      const pending = eager.get(route);
+      eager.delete(route);
+      return pending;
+    }
+    if (!inFlight.has(route)) {
+      const pending = send(route, options).finally(() => inFlight.delete(route));
+      inFlight.set(route, pending);
+    }
+    return inFlight.get(route);
   }
 
   function installJQuery($) {
@@ -113,7 +130,12 @@
     const needsChoices = /\/(?:Report|MaterialMapping)\//i.test(location.pathname)
       && document.querySelector('#materialDescription, #materialBarcode, #materialId, #supplierId, #customerId');
     if (needsChoices) {
-      const materials = await request('/Material/GetAll');
+      const [materials, suppliers, customers, racks] = await Promise.all([
+        request('/Material/GetAll'),
+        document.getElementById('supplierId') ? request('/LocationMaster/GetSuppliers') : null,
+        document.getElementById('customerId') ? request('/LocationMaster/GetIssueTo') : null,
+        /\/MaterialMapping\//i.test(location.pathname) ? request('/RackMaster/GetAll') : null
+      ]);
       const fill = (id, rows, value, label) => {
         const select = document.getElementById(id);
         if (!select || select.tagName !== 'SELECT') return;
@@ -123,9 +145,9 @@
       fill('materialDescription', materials, 'materialId', 'materialName');
       fill('materialBarcode', materials, 'materialId', 'barCode');
       if (/\/Report\//i.test(location.pathname)) fill('materialId', materials, 'materialId', 'materialName');
-      if (document.getElementById('supplierId')) fill('supplierId', await request('/LocationMaster/GetSuppliers'), 'locationId', 'locationName');
-      if (document.getElementById('customerId')) fill('customerId', await request('/LocationMaster/GetIssueTo'), 'locationId', 'locationName');
-      if (/\/MaterialMapping\//i.test(location.pathname)) fill('rack', await request('/RackMaster/GetAll'), 'rackId', 'rackNumber');
+      if (suppliers) fill('supplierId', suppliers, 'locationId', 'locationName');
+      if (customers) fill('customerId', customers, 'locationId', 'locationName');
+      if (racks) fill('rack', racks, 'rackId', 'rackNumber');
     }
     if (/\/Report\/Dashboard\/?$/i.test(location.pathname)) {
       const data = await request('/api/dashboard');
