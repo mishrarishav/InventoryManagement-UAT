@@ -1,24 +1,93 @@
-/* Logos and the shared credit badge match the IFM login branding. */
-.inventory-login-page .container {
-  min-height: calc(100vh - 40px);
-  padding: 24px 12px 88px;
-}
-.inventory-login-page .screen { max-width: 100%; flex-shrink: 0; overflow: hidden; }
-.inventory-login-page .login { max-width: 100%; }
-.inventory-login-logos {
-  position: absolute;
-  top: 36px;
-  left: 20px;
-  right: 20px;
+/* Inventory login and the shared IFM credit badge. */
+body.inventory-login-page {
+  min-height: 100vh;
+  margin: 0;
   display: grid;
-  grid-template-columns: minmax(0, 6.1753fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
-  padding: 14px 12px;
-  border-radius: 10px;
-  background: white;
+  place-items: center;
+  padding: 40px 24px 76px;
+  background: radial-gradient(ellipse at 12% 14%, #e1e9fc, transparent 48%), #f2f5fb;
+  color: #182c4c;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
-.inventory-login-logos img { display: block; width: 100%; height: auto; object-fit: contain; }
+.inventory-login-page *, .inventory-login-page *::before, .inventory-login-page *::after { box-sizing: border-box; }
+.inventory-login-shell {
+  width: min(960px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 20px;
+  align-items: stretch;
+}
+.inventory-login-summary, .inventory-login-panel { border-radius: 22px; padding: 36px; }
+.inventory-login-summary {
+  display: flex;
+  flex-direction: column;
+  min-height: 540px;
+  background: linear-gradient(150deg, #163568, #10213e);
+  color: white;
+  box-shadow: 0 16px 44px #193b6a1a;
+}
+.inventory-login-symbol {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 40px;
+  border: 1px solid #ffffff26;
+  border-radius: 18px;
+  background: #ffffff0d;
+  color: #b9d4ff;
+}
+.inventory-login-symbol svg { width: 40px; height: 40px; }
+.inventory-login-eyebrow { margin: 0 0 12px; color: #b6cdf1; font-size: 11px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; }
+.inventory-login-intro h1 { max-width: 300px; margin: 0; color: white; font-size: 38px; line-height: 1.18; font-weight: 700; letter-spacing: -.9px; }
+.inventory-login-description { margin: 20px 0 36px; color: #c0cee3; font-size: 14px; line-height: 1.8; }
+.inventory-login-release { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 24px; border-top: 1px solid #ffffff26; color: #b6c8e4; font-size: 12px; }
+.inventory-login-release strong { margin-left: 5px; color: white; font-weight: 600; }
+.inventory-login-environment { padding: 3px 7px; border: 1px solid #8bb8ff4d; border-radius: 5px; color: #c9ddff; font-size: 10px; font-weight: 600; letter-spacing: .7px; }
+.inventory-login-panel { min-width: 0; background: white; border: 1px solid #e0e7f1; box-shadow: 0 16px 44px #193b6a0a; }
+.inventory-login-logos {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.inventory-login-logo-card { min-width: 0; display: grid; grid-template-rows: 40px 30px; justify-items: center; align-items: center; gap: 10px; padding: 16px 12px 10px; border: 1px solid #dce5f2; border-radius: 12px; background: #fbfcff; }
+.inventory-login-logos img { display: block; width: 100%; height: 40px; object-fit: contain; }
+.inventory-login-logo-card span { color: #536886; font-size: 11px; font-weight: 600; line-height: 1.35; text-align: center; }
+.inventory-login-welcome h2 { margin: 0 0 8px; color: #182c4c; font-size: 27px; font-weight: 700; letter-spacing: -.5px; }
+.inventory-login-welcome p { margin: 0 0 26px; color: #758297; font-size: 13px; }
+.inventory-login-page .login { display: grid; gap: 18px; margin: 0; padding: 0; width: 100%; }
+.inventory-login-field { display: grid; gap: 8px; }
+.inventory-login-field label { color: #334b6c; font-size: 12px; font-weight: 600; }
+.inventory-login-field input { min-width: 0; width: 100%; height: 48px; padding: 0 14px; border: 1px solid #d7e0ec; border-radius: 9px; background: #fff; color: #182c4c; font: 14px "Segoe UI", Arial, sans-serif; outline: none; transition: border-color .15s, box-shadow .15s; }
+.inventory-login-field input::placeholder { color: #9aa6b7; }
+.inventory-login-field input:focus { border-color: #3158b4; box-shadow: 0 0 0 3px #3158b414; }
+.inventory-login-submit { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; margin-top: 4px; border: 0; border-radius: 9px; background: #234797; color: white; font: 600 13px "Segoe UI", Arial, sans-serif; cursor: pointer; transition: background .15s; }
+.inventory-login-submit svg { width: 18px; height: 18px; }
+.inventory-login-submit:hover { background: #193976; }
+.inventory-login-submit:focus-visible { outline: 3px solid #8fb0ff; outline-offset: 3px; }
+.inventory-login-submit:disabled { opacity: .65; cursor: wait; }
+.inventory-login-page #uat-status { position: static; max-width: none; margin-top: 18px; padding: 9px 11px; border: 0; border-radius: 7px; color: #536886; font-size: 11px; line-height: 1.6; }
+
+@media (max-width: 760px) {
+  body.inventory-login-page { padding: 24px 16px 76px; }
+  .inventory-login-shell { max-width: 500px; grid-template-columns: 1fr; gap: 16px; }
+  .inventory-login-summary { min-height: 0; padding: 26px; }
+  .inventory-login-symbol { display: none; }
+  .inventory-login-eyebrow { margin-bottom: 10px; font-size: 10px; }
+  .inventory-login-intro h1 { max-width: 350px; font-size: 29px; }
+  .inventory-login-description { display: none; }
+  .inventory-login-release { margin-top: 22px; padding-top: 16px; }
+  .inventory-login-panel { padding: 28px; }
+}
+@media (max-width: 420px) {
+  .inventory-login-panel { padding: 24px 20px; }
+  .inventory-login-logos { gap: 10px; margin-bottom: 26px; }
+  .inventory-login-logo-card { grid-template-rows: 32px 30px; padding: 14px 8px 10px; }
+  .inventory-login-logos img { height: 32px; }
+  .inventory-login-logo-card span { font-size: 10px; }
+  .inventory-login-welcome h2 { font-size: 25px; }
+}
 
 body.global-brand-footer-enabled { padding-bottom: max(40px, env(safe-area-inset-bottom)); }
 .global-brand-footer {

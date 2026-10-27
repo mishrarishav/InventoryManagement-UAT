@@ -145,14 +145,14 @@
       element = document.createElement('div');
       element.id = 'uat-status';
       element.setAttribute('role', 'status');
-      document.body.append(element);
+      (document.getElementById('inventory-login-feedback') || document.body).append(element);
     }
     element.textContent = text;
     element.style.background = error ? '#fee2e2' : '#eef2ff';
   }
 
   async function hydrate() {
-    if (isLogin) { status('Inventory UAT · Sign in with your server account.'); return; }
+    if (isLogin) { status('Enter your username and password to continue.'); return; }
     await ready;
     const profile = document.querySelector('.nav-profile span');
     if (profile) profile.textContent = auth.user.name;
@@ -194,7 +194,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     mountBrandFooter();
-    status(isLogin ? 'Inventory UAT · Sign in with your server account.' : 'Connecting to the server…');
+    status(isLogin ? 'Enter your username and password to continue.' : 'Connecting to the server…');
     hydrate().catch(error => status(error.message, true));
     if (isLogin) {
       document.querySelector('form.login').addEventListener('submit', async event => {
