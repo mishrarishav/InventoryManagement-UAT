@@ -1,0 +1,120 @@
+/* Logos and the shared credit badge match the IFM login branding. */
+.inventory-login-page .container {
+  min-height: calc(100vh - 40px);
+  padding: 24px 12px 88px;
+}
+.inventory-login-page .screen { max-width: 100%; flex-shrink: 0; overflow: hidden; }
+.inventory-login-page .login { max-width: 100%; }
+.inventory-login-logos {
+  position: absolute;
+  top: 36px;
+  left: 20px;
+  right: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 6.1753fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+  border-radius: 10px;
+  background: white;
+}
+.inventory-login-logos img { display: block; width: 100%; height: auto; object-fit: contain; }
+
+body.global-brand-footer-enabled { padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+.global-brand-footer {
+  position: fixed;
+  right: 16px;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 11001;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 999px;
+  padding: 3px 6px;
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(214, 224, 237, .95);
+  color: #154a9f;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, .12);
+  pointer-events: none;
+}
+.global-brand-footer-text { position: relative; z-index: 1; display: inline-flex; flex-direction: column; line-height: 1; }
+.global-brand-footer-owner { font-size: .64rem; font-weight: 600; letter-spacing: .15px; color: #173f7b; }
+.global-brand-footer-owner strong {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 2px;
+  font-family: "Arial Black", "Segoe UI Black", Arial, sans-serif;
+  font-size: .76rem;
+  font-weight: 900;
+  color: #173f7b;
+  background: white;
+  border-radius: 3px;
+  line-height: 18px;
+  letter-spacing: .12px;
+}
+.global-brand-footer-particles { position: absolute; inset: 3px 8px; z-index: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.global-brand-footer-particle-x {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% - var(--footer-dot-size));
+  height: 100%;
+  color: #487bd0;
+  opacity: var(--footer-dot-opacity, .65);
+  animation: inventory-footer-bounce-x var(--footer-bounce-x, 16s) linear infinite alternate;
+  animation-delay: var(--footer-delay-x, 0s);
+}
+.global-brand-footer-particle-y {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--footer-dot-size);
+  height: calc(100% - var(--footer-dot-size));
+  animation: inventory-footer-bounce-y var(--footer-bounce-y, 5s) linear infinite alternate;
+  animation-delay: var(--footer-delay-y, 0s);
+}
+.global-brand-footer-particle-y::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--footer-dot-size);
+  height: var(--footer-dot-size);
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 2px currentColor;
+}
+.global-brand-footer-particle-x:nth-child(3n + 2) { color: #9973cf; }
+.global-brand-footer-particle-x:nth-child(3n) { color: #5e46a4; }
+@keyframes inventory-footer-bounce-x { from { transform: translateX(0); } to { transform: translateX(100%); } }
+@keyframes inventory-footer-bounce-y { from { transform: translateY(0); } to { transform: translateY(100%); } }
+.global-brand-footer img { position: relative; z-index: 1; width: 24px; height: 24px; object-fit: contain; }
+
+#uat-status {
+  position: fixed;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 11000;
+  max-width: calc(100vw - 280px);
+  padding: 6px 10px;
+  border: 1px solid #d4d3e8;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #373071;
+  font: 12px/1.4 system-ui, sans-serif;
+}
+@media (max-width: 600px) {
+  .global-brand-footer { right: 10px; padding: 3px 7px; }
+  .global-brand-footer img { width: 22px; height: 22px; }
+  .global-brand-footer-owner { font-size: .62rem; }
+  #uat-status { left: 12px; bottom: max(50px, calc(env(safe-area-inset-bottom) + 42px)); max-width: calc(100vw - 24px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .global-brand-footer-particles { display: none; }
+  .global-brand-footer-particle-x, .global-brand-footer-particle-y { animation: none; }
+}

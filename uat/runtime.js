@@ -107,12 +107,44 @@
   };
   window.InventoryUat = { request, installJQuery, ready };
 
+  function mountBrandFooter() {
+    if (document.getElementById('globalBrandFooter')) return;
+    document.body.classList.add('global-brand-footer-enabled');
+    const footer = document.createElement('div');
+    footer.id = 'globalBrandFooter';
+    footer.className = 'global-brand-footer';
+    footer.innerHTML = '<span class="global-brand-footer-text"><span class="global-brand-footer-owner">by <strong>Mahad Globus India</strong></span></span>'
+      + `<img src="${base}assets/img/mahad-globus.png" alt="" width="24" height="24">`;
+    const particles = document.createElement('span');
+    particles.className = 'global-brand-footer-particles';
+    particles.setAttribute('aria-hidden', 'true');
+    // Independent CSS axes reproduce the reference's floating glitter dots.
+    for (let index = 0; index < 48; index++) {
+      const horizontal = document.createElement('span');
+      horizontal.className = 'global-brand-footer-particle-x';
+      const vertical = document.createElement('span');
+      vertical.className = 'global-brand-footer-particle-y';
+      const durationX = 12 + Math.random() * 12;
+      const durationY = 3 + Math.random() * 5;
+      horizontal.style.setProperty('--footer-dot-size', `${(1.3 + Math.random() * 1.1).toFixed(2)}px`);
+      horizontal.style.setProperty('--footer-dot-opacity', (0.45 + Math.random() * 0.4).toFixed(2));
+      horizontal.style.setProperty('--footer-bounce-x', `${durationX.toFixed(2)}s`);
+      horizontal.style.setProperty('--footer-bounce-y', `${durationY.toFixed(2)}s`);
+      horizontal.style.setProperty('--footer-delay-x', `${(-Math.random() * durationX * 2).toFixed(2)}s`);
+      horizontal.style.setProperty('--footer-delay-y', `${(-Math.random() * durationY * 2).toFixed(2)}s`);
+      horizontal.appendChild(vertical);
+      particles.appendChild(horizontal);
+    }
+    footer.appendChild(particles);
+    document.body.appendChild(footer);
+  }
+
   function status(text, error = false) {
     let element = document.getElementById('uat-status');
     if (!element) {
       element = document.createElement('div');
       element.id = 'uat-status';
-      element.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:11000;padding:8px 16px;background:#eef2ff;color:#373071;font:13px system-ui;border-top:1px solid #d4d3e8';
+      element.setAttribute('role', 'status');
       document.body.append(element);
     }
     element.textContent = text;
@@ -161,6 +193,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    mountBrandFooter();
     status(isLogin ? 'Inventory UAT · Sign in with your server account.' : 'Connecting to the server…');
     hydrate().catch(error => status(error.message, true));
     if (isLogin) {
