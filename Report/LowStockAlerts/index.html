@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Inventory Report - Inventory Management</title>
+    <title>Re-order Alerts - Inventory Management</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -187,7 +187,8 @@
     <main b-c4618qd80j id="main" class="main">
         
 <div class="pagetitle">
-    <h1>Low Stock Report</h1>
+    <h1>Re-order Alerts</h1>
+    <p class="text-muted small">Materials with current total stock at or below the reorder level. Date filters apply to the last stock update.</p>
 </div>
 
 <section class="section">
@@ -199,16 +200,16 @@
                         <div class="col-md-3">
                             <label for="materialId">Material</label>
                             <select name="materialId" id="materialId" class="form-control">
-                            <option>Select Material</option>
+                            <option value="">All materials</option>
                                     <option value="1">UAT Sample Material</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label for="startDate">Start Date</label>
+                            <label for="startDate">Stock Updated From</label>
                             <input type="date" id="startDate" class="form-control" />
                         </div>
                         <div class="col-md-2">
-                            <label for="endDate">End Date</label>
+                            <label for="endDate">Stock Updated To</label>
                             <input type="date" id="endDate" class="form-control" />
                         </div>                                              
                         <div class="col-md-2">
@@ -223,10 +224,11 @@
                     <table class="table" id="reportTable">
                         <thead>
                             <tr>                               
-                                <th>Alert Date</th>
+                                <th>Part Number</th>
                                 <th>Material</th>
-                                <th>Quantity</th>
+                                <th>Available Stock</th>
                                 <th>ReOrder Level</th>
+                                <th>Last Stock Update</th>
                             </tr>
                         </thead>
                         <tbody>                           
@@ -266,11 +268,23 @@
 <script>
     var mytable;
     $(document).ready(function () {
-        mytable =  initDataTable('#reportTable','Alerts_Report');        
+        mytable = initDataTable('#reportTable', 'Alerts_Report', {
+            order: [[4, 'desc']],
+            columns: [
+                { data: 'barCode', defaultContent: '', render: $.fn.dataTable.render.text() },
+                { data: 'materialName', render: $.fn.dataTable.render.text() },
+                { data: 'quantity' },
+                { data: 'reOrderLevel' },
+                { data: 'lastUpdated', render: function (value, type) {
+                    return value == null && (type === 'display' || type === 'filter') ? '—' : renderReportDate(value, type);
+                } }
+            ]
+        });
 
         $('#btnFilter').click(function(){
             loadReports();
-        });       
+        });
+        loadReports();
     });
 
     function loadReports() {                
@@ -280,18 +294,7 @@
 
         $.getJSON(`/Report/LowStockReport?materialId=${materialId}&startDate=${startDate}&endDate=${endDate}`, function (data) {
              mytable.clear();                           
-             var rows = [];
-                data.forEach(item => {
-                     var rowData = [
-                            item.alertDate,
-                            item.materialName,                            
-                            item.quantity,
-                            item.reOrderLevel,                            
-                        ];
-                        rows.push(rowData);
-                });
-               mytable.clear();
-               mytable.rows.add(rows).draw();             
+             mytable.rows.add(data).draw();
         });
     }    
 </script>
