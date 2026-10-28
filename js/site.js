@@ -2,13 +2,15 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function initDataTable(tableId, downloadfileName) {
-    return $(tableId).DataTable({
-        dom: 'Blfrtip',
-        buttons: [
+function initDataTable(tableId, downloadfileName, options) {
+    return $(tableId).DataTable(Object.assign({
+        order: [],
+        dom: downloadfileName ? 'Blfrtip' : 'lfrtip',
+        buttons: downloadfileName ? [
             {
                 extend: 'csv',
                 text: 'Download',
+                bom: true,
                 filename: function () {
                     var today = new Date();
                     var dd = String(today.getDate()).padStart(2, '0');
@@ -18,11 +20,7 @@ function initDataTable(tableId, downloadfileName) {
                     return downloadfileName + "_" + today;
                 }
             }
-        ],
-        'aoColumnDefs': [{
-            'bSortable': false,
-            'aTargets': [0] /* 1st one, start by the right */
-        }],
+        ] : [],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "paging": true,
         "lengthChange": false,
@@ -33,23 +31,24 @@ function initDataTable(tableId, downloadfileName) {
         "autoWidth": true,
         "pageLength": 50,
 
-    });
+    }, options || {}));
 }
 
-function initDataTable(tableId) {
-    return $(tableId).DataTable({        
-        'aoColumnDefs': [{
-            'bSortable': false,
-            'aTargets': [0] /* 1st one, start by the right */
-        }],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "paging": true,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "filtering": true,
-        "info": true,
-        "autoWidth": true,
-        "pageLength": 50,
-    });
+// Sort dates by full timestamps rather than localized display strings.
+function renderReportDate(value, type) {
+    if (!value) return type === 'sort' || type === 'type' ? 0 : '';
+    var date = new Date(value);
+    if (isNaN(date.getTime())) return value;
+    return type === 'sort' || type === 'type' ? date.getTime() : date.toLocaleString('en-IN');
+}
+
+function reportDateOptions() {
+    return { order: [[0, 'desc']], columnDefs: [{ targets: 0, render: renderReportDate }] };
+}
+
+function renderReportCurrency(value, type) {
+    if (value == null) return type === 'display' || type === 'filter' ? '—' : '';
+    return type === 'display' || type === 'filter'
+        ? new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(value)
+        : Number(value);
 }

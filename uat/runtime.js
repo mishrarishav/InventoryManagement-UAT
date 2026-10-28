@@ -183,7 +183,7 @@
     }
     if (/\/Report\/Dashboard\/?$/i.test(location.pathname)) {
       const data = await request('/api/dashboard');
-      document.getElementById('genValue').textContent = data.inventoryValue ?? 0;
+      document.getElementById('genValue').textContent = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(data.inventoryValue ?? 0);
       document.getElementById('InValue').textContent = data.inventoryCount ?? 0;
       const values = document.querySelectorAll('#PenValue');
       values[0].textContent = data.lowStockCount;

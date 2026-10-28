@@ -1,4 +1,11 @@
 /* Inventory login and the shared IFM credit badge. */
+table.dataTable tbody tr.inventory-reorder-row > td,
+table tbody tr.inventory-reorder-row > td {
+  background-color: #fff3cd !important;
+  color: #664d03;
+  box-shadow: none;
+}
+table tbody tr.inventory-reorder-row > td:first-child { border-left: 4px solid #d39e00; font-weight: 600; }
 body.inventory-login-page {
   min-height: 100vh;
   margin: 0;

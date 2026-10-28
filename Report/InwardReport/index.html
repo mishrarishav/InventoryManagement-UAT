@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><link rel="preconnect" href="https://tserver2.eeslindia.org" crossorigin><link rel="preload" href="/InventoryManagement-UAT/uat/vendor-5320cbf6e236.js" as="script"><link rel="stylesheet" href="/InventoryManagement-UAT/uat/app-fecac395ebe8.css"><script>window.INVENTORY_UAT_BASE="/InventoryManagement-UAT/";window.INVENTORY_API_BASE="https://tserver2.eeslindia.org/InventoryMgmt";(()=>{"use strict";const c=window.INVENTORY_UAT_BASE,b=window.INVENTORY_API_BASE.replace(/\/$/,""),v=window.fetch.bind(window),w=`inventory-pages:${c}:server-login:v1`,p=/\/Users\/Login\/?$/i.test(location.pathname),N=/\/Report\/Dashboard\/?$/i.test(location.pathname);let s;try{s=JSON.parse(localStorage.getItem(w))}catch(a){s=null}function I(){localStorage.removeItem(w),s=null,location.assign(`${c}Users/Login/`)}async function m(a,t={},e=!1){const n={Accept:"application/json"};!e&&(s!=null&&s.token)&&(n.Authorization=`Bearer ${s.token}`),t.body!=null&&(n["Content-Type"]="application/json");let i;try{i=await v(b+a,{method:t.method||"GET",headers:n,credentials:"omit",...t.body!=null?{body:typeof t.body=="string"?t.body:JSON.stringify(t.body)}:{}})}catch(g){throw new Error("Could not reach the server. Please try again.")}const o=await i.text();let r;try{r=o?JSON.parse(o):null}catch(g){r=o}if(!i.ok)throw i.status===401&&!e&&!p&&I(),Object.assign(new Error((r==null?void 0:r.message)||(typeof r=="string"&&r.length<500?r:"The server could not complete this request.")),{status:i.status});return r}const E=Promise.resolve();p||s!=null&&s.token||I();const f=new Map;if(N&&(s!=null&&s.token))for(const a of["/api/dashboard","/Report/MaterialInwardReportDashboard","/Report/MaterialOutwardReportDashboard"]){const t=m(a);t.catch(()=>{}),f.set(a,t)}const y=new Map;function M(a){const t=new URL(a,location.href);if(t.origin!==location.origin&&t.origin!==new URL(b).origin)return null;let e=t.pathname;e.startsWith(c)&&(e="/"+e.slice(c.length));const n=new URL(b).pathname.replace(/\/$/,"");return n&&e.startsWith(n+"/")&&(e=e.slice(n.length)),/^\/api\//i.test(e)||/^\/(Users|RackMaster|LevelMaster|BinMaster|LocationMaster|MaterialType|Material|MaterialMapping|MaterialMovement|Report)\/(Get\w*|Create\w*|Edit|ChangePassword|Material\w*Report\w*|LowStockReport|InwardReport|OutwardReport)$/i.test(e)?e+t.search:null}async function l(a,t={}){await E;const e=M(a);if(!e)throw new Error("Unknown inventory API route.");if((t.method||"GET").toUpperCase()!=="GET")return m(e,t);if(f.has(e)){const n=f.get(e);return f.delete(e),n}if(!y.has(e)){const n=m(e,t).finally(()=>y.delete(e));y.set(e,n)}return y.get(e)}function B(a){a.ajaxTransport("+*",t=>{if(!M(t.url))return;let e=!1;return{send(n,i){l(t.url,{method:t.type,body:t.data}).then(o=>{e||i(200,"success",{text:JSON.stringify(o)},"Content-Type: application/json")},o=>{e||i(o.status||503,"error",{text:o.message})})},abort(){e=!0}}})}window.fetch=async(a,t)=>{if(typeof a!="string"||!M(a))return v(a,t);try{return new Response(JSON.stringify(await l(a,t)),{headers:{"Content-Type":"application/json"}})}catch(e){return new Response(e.message,{status:e.status||503})}},window.InventoryUat={request:l,installJQuery:B,ready:E};function k(){if(document.getElementById("globalBrandFooter"))return;document.body.classList.add("global-brand-footer-enabled");const a=document.createElement("div");a.id="globalBrandFooter",a.className="global-brand-footer",a.innerHTML=`<span class="global-brand-footer-text"><span class="global-brand-footer-owner">by <strong>Mahad Globus India</strong></span></span><img src="${c}assets/img/mahad-globus.png" alt="" width="24" height="24">`;const t=document.createElement("span");t.className="global-brand-footer-particles",t.setAttribute("aria-hidden","true");for(let e=0;e<48;e++){const n=document.createElement("span");n.className="global-brand-footer-particle-x";const i=document.createElement("span");i.className="global-brand-footer-particle-y";const o=12+Math.random()*12,r=3+Math.random()*5;n.style.setProperty("--footer-dot-size",`${(1.3+Math.random()*1.1).toFixed(2)}px`),n.style.setProperty("--footer-dot-opacity",(.45+Math.random()*.4).toFixed(2)),n.style.setProperty("--footer-bounce-x",`${o.toFixed(2)}s`),n.style.setProperty("--footer-bounce-y",`${r.toFixed(2)}s`),n.style.setProperty("--footer-delay-x",`${(-Math.random()*o*2).toFixed(2)}s`),n.style.setProperty("--footer-delay-y",`${(-Math.random()*r*2).toFixed(2)}s`),n.appendChild(i),t.appendChild(n)}a.appendChild(t),document.body.appendChild(a)}function d(a,t=!1){let e=document.getElementById("uat-status");e||(e=document.createElement("div"),e.id="uat-status",e.setAttribute("role","status"),(document.getElementById("inventory-login-feedback")||document.body).append(e)),e.textContent=a,e.style.background=t?"#fee2e2":"#eef2ff"}async function L(){var n,i;if(p){d("Enter your username and password to continue.");return}await E;const a=document.querySelector(".nav-profile span");a&&(a.textContent=s.user.name);const t=document.querySelector(".dropdown-header span");if(t&&(t.textContent=s.user.role),/\/(?:Report|MaterialMapping)\//i.test(location.pathname)&&document.querySelector("#materialDescription, #materialBarcode, #materialId, #supplierId, #customerId")){const[o,r,g,C]=await Promise.all([l("/Material/GetAll"),document.getElementById("supplierId")?l("/LocationMaster/GetSuppliers"):null,document.getElementById("customerId")?l("/LocationMaster/GetIssueTo"):null,/\/MaterialMapping\//i.test(location.pathname)?l("/RackMaster/GetAll"):null]),u=(T,$,O,P)=>{var x;const h=document.getElementById(T);if(!h||h.tagName!=="SELECT")return;const A=((x=h.options[0])==null?void 0:x.text)||"Select";h.replaceChildren(new Option(A,""),...$.map(S=>{var R;return new Option((R=S[P])!=null?R:"",S[O])}))};u("materialDescription",o,"materialId","materialName"),u("materialBarcode",o,"materialId","barCode"),/\/Report\//i.test(location.pathname)&&u("materialId",o,"materialId","materialName"),r&&u("supplierId",r,"locationId","locationName"),g&&u("customerId",g,"locationId","locationName"),C&&u("rack",C,"rackId","rackNumber")}if(/\/Report\/Dashboard\/?$/i.test(location.pathname)){const o=await l("/api/dashboard");document.getElementById("genValue").textContent=(n=o.inventoryValue)!=null?n:0,document.getElementById("InValue").textContent=(i=o.inventoryCount)!=null?i:0;const r=document.querySelectorAll("#PenValue");r[0].textContent=o.lowStockCount,r[1].textContent=`${Number(o.capacityUtilization||0).toFixed(1)} %`}d("Inventory UAT \xB7 Connected to the shared server database.")}document.addEventListener("DOMContentLoaded",()=>{k(),d(p?"Enter your username and password to continue.":"Connecting to the server\u2026"),L().catch(a=>d(a.message,!0)),p&&document.querySelector("form.login").addEventListener("submit",async a=>{a.preventDefault();const t=a.currentTarget.querySelector('button[type="submit"]');t.disabled=!0,d("Signing in\u2026");try{s=await m("/api/auth/login",{method:"POST",body:{username:document.getElementById("username").value,password:document.getElementById("password").value}},!0),localStorage.setItem(w,JSON.stringify(s)),location.assign(`${c}Report/Dashboard/`)}catch(e){d(e.message,!0),t.disabled=!1}}),document.querySelectorAll('a[href="#uat-logout"]').forEach(a=>a.addEventListener("click",t=>{t.preventDefault(),I()}))})})();
+<head><meta charset="utf-8"><link rel="preconnect" href="https://tserver2.eeslindia.org" crossorigin><link rel="preload" href="/InventoryManagement-UAT/uat/vendor-e48274d2f581.js" as="script"><link rel="stylesheet" href="/InventoryManagement-UAT/uat/app-491d3e49822e.css"><script>window.INVENTORY_UAT_BASE="/InventoryManagement-UAT/";window.INVENTORY_API_BASE="https://tserver2.eeslindia.org/InventoryMgmt";(()=>{"use strict";const c=window.INVENTORY_UAT_BASE,b=window.INVENTORY_API_BASE.replace(/\/$/,""),v=window.fetch.bind(window),w=`inventory-pages:${c}:server-login:v1`,m=/\/Users\/Login\/?$/i.test(location.pathname),N=/\/Report\/Dashboard\/?$/i.test(location.pathname);let s;try{s=JSON.parse(localStorage.getItem(w))}catch(a){s=null}function I(){localStorage.removeItem(w),s=null,location.assign(`${c}Users/Login/`)}async function p(a,t={},e=!1){const n={Accept:"application/json"};!e&&(s!=null&&s.token)&&(n.Authorization=`Bearer ${s.token}`),t.body!=null&&(n["Content-Type"]="application/json");let i;try{i=await v(b+a,{method:t.method||"GET",headers:n,credentials:"omit",...t.body!=null?{body:typeof t.body=="string"?t.body:JSON.stringify(t.body)}:{}})}catch(g){throw new Error("Could not reach the server. Please try again.")}const o=await i.text();let r;try{r=o?JSON.parse(o):null}catch(g){r=o}if(!i.ok)throw i.status===401&&!e&&!m&&I(),Object.assign(new Error((r==null?void 0:r.message)||(typeof r=="string"&&r.length<500?r:"The server could not complete this request.")),{status:i.status});return r}const E=Promise.resolve();m||s!=null&&s.token||I();const f=new Map;if(N&&(s!=null&&s.token))for(const a of["/api/dashboard","/Report/MaterialInwardReportDashboard","/Report/MaterialOutwardReportDashboard"]){const t=p(a);t.catch(()=>{}),f.set(a,t)}const y=new Map;function M(a){const t=new URL(a,location.href);if(t.origin!==location.origin&&t.origin!==new URL(b).origin)return null;let e=t.pathname;e.startsWith(c)&&(e="/"+e.slice(c.length));const n=new URL(b).pathname.replace(/\/$/,"");return n&&e.startsWith(n+"/")&&(e=e.slice(n.length)),/^\/api\//i.test(e)||/^\/(Users|RackMaster|LevelMaster|BinMaster|LocationMaster|MaterialType|Material|MaterialMapping|MaterialMovement|Report)\/(Get\w*|Create\w*|Edit|ChangePassword|Material\w*Report\w*|LowStockReport|InwardReport|OutwardReport)$/i.test(e)?e+t.search:null}async function l(a,t={}){await E;const e=M(a);if(!e)throw new Error("Unknown inventory API route.");if((t.method||"GET").toUpperCase()!=="GET")return p(e,t);if(f.has(e)){const n=f.get(e);return f.delete(e),n}if(!y.has(e)){const n=p(e,t).finally(()=>y.delete(e));y.set(e,n)}return y.get(e)}function B(a){a.ajaxTransport("+*",t=>{if(!M(t.url))return;let e=!1;return{send(n,i){l(t.url,{method:t.type,body:t.data}).then(o=>{e||i(200,"success",{text:JSON.stringify(o)},"Content-Type: application/json")},o=>{e||i(o.status||503,"error",{text:o.message})})},abort(){e=!0}}})}window.fetch=async(a,t)=>{if(typeof a!="string"||!M(a))return v(a,t);try{return new Response(JSON.stringify(await l(a,t)),{headers:{"Content-Type":"application/json"}})}catch(e){return new Response(e.message,{status:e.status||503})}},window.InventoryUat={request:l,installJQuery:B,ready:E};function k(){if(document.getElementById("globalBrandFooter"))return;document.body.classList.add("global-brand-footer-enabled");const a=document.createElement("div");a.id="globalBrandFooter",a.className="global-brand-footer",a.innerHTML=`<span class="global-brand-footer-text"><span class="global-brand-footer-owner">by <strong>Mahad Globus India</strong></span></span><img src="${c}assets/img/mahad-globus.png" alt="" width="24" height="24">`;const t=document.createElement("span");t.className="global-brand-footer-particles",t.setAttribute("aria-hidden","true");for(let e=0;e<48;e++){const n=document.createElement("span");n.className="global-brand-footer-particle-x";const i=document.createElement("span");i.className="global-brand-footer-particle-y";const o=12+Math.random()*12,r=3+Math.random()*5;n.style.setProperty("--footer-dot-size",`${(1.3+Math.random()*1.1).toFixed(2)}px`),n.style.setProperty("--footer-dot-opacity",(.45+Math.random()*.4).toFixed(2)),n.style.setProperty("--footer-bounce-x",`${o.toFixed(2)}s`),n.style.setProperty("--footer-bounce-y",`${r.toFixed(2)}s`),n.style.setProperty("--footer-delay-x",`${(-Math.random()*o*2).toFixed(2)}s`),n.style.setProperty("--footer-delay-y",`${(-Math.random()*r*2).toFixed(2)}s`),n.appendChild(i),t.appendChild(n)}a.appendChild(t),document.body.appendChild(a)}function d(a,t=!1){let e=document.getElementById("uat-status");e||(e=document.createElement("div"),e.id="uat-status",e.setAttribute("role","status"),(document.getElementById("inventory-login-feedback")||document.body).append(e)),e.textContent=a,e.style.background=t?"#fee2e2":"#eef2ff"}async function L(){var n,i;if(m){d("Enter your username and password to continue.");return}await E;const a=document.querySelector(".nav-profile span");a&&(a.textContent=s.user.name);const t=document.querySelector(".dropdown-header span");if(t&&(t.textContent=s.user.role),/\/(?:Report|MaterialMapping)\//i.test(location.pathname)&&document.querySelector("#materialDescription, #materialBarcode, #materialId, #supplierId, #customerId")){const[o,r,g,C]=await Promise.all([l("/Material/GetAll"),document.getElementById("supplierId")?l("/LocationMaster/GetSuppliers"):null,document.getElementById("customerId")?l("/LocationMaster/GetIssueTo"):null,/\/MaterialMapping\//i.test(location.pathname)?l("/RackMaster/GetAll"):null]),u=(T,$,O,P)=>{var x;const h=document.getElementById(T);if(!h||h.tagName!=="SELECT")return;const A=((x=h.options[0])==null?void 0:x.text)||"Select";h.replaceChildren(new Option(A,""),...$.map(R=>{var S;return new Option((S=R[P])!=null?S:"",R[O])}))};u("materialDescription",o,"materialId","materialName"),u("materialBarcode",o,"materialId","barCode"),/\/Report\//i.test(location.pathname)&&u("materialId",o,"materialId","materialName"),r&&u("supplierId",r,"locationId","locationName"),g&&u("customerId",g,"locationId","locationName"),C&&u("rack",C,"rackId","rackNumber")}if(/\/Report\/Dashboard\/?$/i.test(location.pathname)){const o=await l("/api/dashboard");document.getElementById("genValue").textContent=new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR"}).format((n=o.inventoryValue)!=null?n:0),document.getElementById("InValue").textContent=(i=o.inventoryCount)!=null?i:0;const r=document.querySelectorAll("#PenValue");r[0].textContent=o.lowStockCount,r[1].textContent=`${Number(o.capacityUtilization||0).toFixed(1)} %`}d("Inventory UAT \xB7 Connected to the shared server database.")}document.addEventListener("DOMContentLoaded",()=>{k(),d(m?"Enter your username and password to continue.":"Connecting to the server\u2026"),L().catch(a=>d(a.message,!0)),m&&document.querySelector("form.login").addEventListener("submit",async a=>{a.preventDefault();const t=a.currentTarget.querySelector('button[type="submit"]');t.disabled=!0,d("Signing in\u2026");try{s=await p("/api/auth/login",{method:"POST",body:{username:document.getElementById("username").value,password:document.getElementById("password").value}},!0),localStorage.setItem(w,JSON.stringify(s)),location.assign(`${c}Report/Dashboard/`)}catch(e){d(e.message,!0),t.disabled=!1}}),document.querySelectorAll('a[href="#uat-logout"]').forEach(a=>a.addEventListener("click",t=>{t.preventDefault(),I()}))})})();
 </script>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -26,11 +26,12 @@
     
 
     
+    
 
     
     
 
-<script src="/InventoryManagement-UAT/uat/vendor-5320cbf6e236.js"></script><script>window.InventoryUat.installJQuery(window.jQuery);</script></head>
+<script src="/InventoryManagement-UAT/uat/vendor-e48274d2f581.js"></script><script>window.InventoryUat.installJQuery(window.jQuery);</script></head>
 <body>
 
     <!-- ======= Header ======= -->
@@ -249,14 +250,11 @@
             <div class="card mt-3">
        <div class="card mt-3">
     <div class="card-body p-2">
-        <h5 class="card-title">Top 20 Transactions</h5>
+        <h5 class="card-title">Inward Transactions</h5>
         <button id="exportToExcel" class="btn btn-success" style="position: absolute; top: 10px; right: 10px;">Export to Excel</button>
         <div style="overflow: auto; max-height: 250px; min-width: 100%;">
             <table id="reportTable" class="table table-striped table-bordered mb-0" style="font-size: small; min-width: 600px;">
                 <thead class="table-light">
-                    <tr>
-                        <th colspan="10">Top 20 Transactions</th>
-                    </tr>
                     <tr>
                         <th>Date Time</th>
                         <th>Part Number</th>
@@ -286,15 +284,15 @@
             let cells = row.cells;
             let rowContent = [];
             for (let cellIndex = 0; cellIndex < cells.length; cellIndex++) {
-                rowContent.push(cells[cellIndex].innerText);
+                rowContent.push('"' + cells[cellIndex].innerText.replaceAll('"', '""') + '"');
             }
             csvContent += rowContent.join(",") + "\n";
         }
 
-        let blob = new Blob([csvContent], { type: "text/csv" });
+        let blob = new Blob(['\uFEFF', csvContent], { type: "text/csv;charset=utf-8" });
         let link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'top_20_transactions.csv';
+        link.download = 'inward_transactions.csv';
         link.click();
     });
 </script>
@@ -328,7 +326,7 @@
     
 
     <!-- Template Main JS File -->
-    <script src="/InventoryManagement-UAT/assets/js/main.js?v=25f95406a75a"></script>
+    <script src="/InventoryManagement-UAT/assets/js/main.js?v=0b07d9bf38a0"></script>
 
 
     
@@ -339,7 +337,7 @@
 
         $(document).ready(function () {
             // Initialize DataTable
-            mytable = initDataTable('#reportTable', 'Inward_Report');
+            mytable = initDataTable('#reportTable', 'Inward_Report', reportDateOptions());
 
             // Initialize Select2
             $('.select2').select2({ width: '100%' });
@@ -365,6 +363,7 @@
             $('#btnFilter').click(function () {
                 loadReports();
             });
+            loadReports();
         });
 
         function loadReports() {
@@ -378,7 +377,7 @@
                 var rows = [];
                 data.forEach(item => {
                     var rowData = [
-                        new Date(item.inwardDate).toLocaleDateString(),
+                        item.inwardDate,
                         item.barCode,
                         item.materialName,
                         item.rackNumber + '-' + item.levelNumber + '-' + item.binNumber,
